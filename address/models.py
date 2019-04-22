@@ -97,6 +97,8 @@ def _to_python(value):
                 route=route,
                 locality=locality_obj
             )
+    except Address.MultipleObjectsReturned:
+        address_obj = Address.objects.filter(raw=raw).first()
     except Address.DoesNotExist:
         address_obj = Address(
             street_number=street_number,
